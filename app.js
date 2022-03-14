@@ -58,20 +58,32 @@ function deleteCheck(e) {
 }
 
 function filterTodo(e) {
-    const todos = document.querySelectorAll(".todo")
-    todos.forEach(function(todo) {
-        switch (e.target.value) {
-            case "all":
-                todo.style.display = "flex";
-                break;
+    const todos = todoList.childNodes;
+    todos.forEach(function (todo) { 
+        const mStyle = todo.style;  
+        if(mStyle != undefined && mStyle != null){
+            switch (e.target.value) {
+                case "all":
+                    mStyle.display = "flex";
+                    break;
                 case "completed":
-                    if (todo.classList.contains("completed")) {
-                        todo.style.display = "flex";
+                    if (todo.classList.contains('completed')) {
+                        mStyle.display = 'flex';
                     } else {
-                        todo.style.display = "none";
+                        mStyle.display = "none";
                     }
+                    break;
+                case "uncompleted":
+                    if (todo.classList.contains('completed')){
+                        mStyle.display = 'none';
+                    }
+                    else{
+                        mStyle.display = "flex";
+                    }
+                    break;
+            }
         }
-    });
+    })
 }
 
 
